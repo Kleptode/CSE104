@@ -1,0 +1,87 @@
+@Author:
+    Elijah Holmberg
+
+Included Files:
+    README
+    Makefile
+    astree.cpp
+    astree.h
+    auxlib.cpp
+    auxlib.h
+    string_set.cpp
+    string_set.h
+    symbol_table.cpp
+    symbol_table.h
+    main.cpp
+
+Makefile:
+    Edited form of a file provided by Wesley Mackey. 
+    Based on the Makefile found in expr-smc
+
+astree.cpp:
+    Edited form of a file provided by Wesley Mackey. Added a 
+    function to swap symbols and modified print function to 
+    generate .tok file and .ast file.
+
+astree.h:
+    File Provided by Wesley Mackey.
+
+auxlib.cpp:
+    File provided by Wesley Mackey. 
+
+auxlib.h:
+    File provided by Wesley Mackey. 
+
+lyutils.cpp:
+    File provided by Wesley Mackey.
+
+lyutils.h:
+    File provided by Wesley Mackey.
+
+string_set.cpp:
+    File provided by Wesley Mackey.
+
+string_set.h:
+    File provided by Wesley Mackey.
+
+scanner.l:
+    Flex file that converts symbols into tokens recognized 
+    by the provided parser.y file. Detects all symbols,
+    keywords, and excape characters required by the 
+    assignment odf.
+
+parser.y:
+    Handles all syntax accepted by the oc languange. Unfortunately, 
+    I could not solve the shift/reduce conflicts that occur at the 
+    variable nonterminal.
+
+symbol_table.cpp:
+    Generates the symbol table for the oc program. Currently causes
+    one Seg Fault when run on the test code.
+
+symbol_table.h:
+    Standard header file for symbol_table.cpp.
+
+emitter.cpp:
+    Emits the an oil file created by parsing through the astree.
+    The meets teh requirements for local and gloabl variable 
+    declarations. A switch statement  handles the emission of 
+    each kind of token and most function mangle strings to 
+    assembly accepted format. A small set of token's were not 
+    handled and emit string such as "ident a". While, if, and 
+    else statements handled as well as arrays, allocs, and ptrs. 
+    All tokens that produce headers at the front of the line do so. 
+    Any other print statement occurs at exactly 10 spaces of indent.
+
+emitter.h:
+   Standard header file for emitter.cpp
+
+main.cpp:
+    Reads input .oc file using yylex(). Stores tokens
+    using the astree data structure and prints them to the .tok file
+    in the lexer::token() function of lyutils.cpp. Also stores tokens
+    in a string_set data structure and prints to to the .str file.
+    Generates the abstract syntax and stores it in the .ast file.
+    Also generates the .sym file for the symbol table.
+    Please read comments in main.cpp for more information about
+    specific functions. 
